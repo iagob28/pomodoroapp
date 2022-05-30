@@ -1,11 +1,13 @@
 import { GoTriangleRight } from "react-icons/go";
 import { Header } from "../components/Header/Header";
 import { useState } from "react";
+import { useTimer } from "../hooks/useTimer";
+import { GiPauseButton } from "react-icons/gi";
 
 export function Timer() {
-  const minutes = "25";
-  const seconds = "00";
-  const [sessions, setSessions] = useState(2);
+  const { seconds, sessions, isActive, changeIsActive } = useTimer();
+  const displayMinutes = Math.floor(seconds / 60);
+  const displaySeconds = seconds % 60;
 
   return (
     <>
@@ -14,7 +16,8 @@ export function Timer() {
         <div className="flex justify-center items-center h-80 w-80 bg-slate-600 rounded-full shadow-lg shadow-slate-600">
           <span className="flex justify-center items-center h-60 w-60 bg-transparent rounded-full border-4 border-green-500">
             <p className="text-6xl font-bold text-slate-300">
-              {minutes}:{seconds}
+              {String(displayMinutes).padStart(2, "0")}:
+              {String(displaySeconds).padStart(2, "0")}
             </p>
           </span>
         </div>
@@ -35,7 +38,7 @@ export function Timer() {
               )}
             </span>
           </div>
-          <button className="flex bg-slate-500 rounded-md h-20 w-20 text-6xl shadow-md hover:bg-slate-600 text-slate-300 items-center justify-center">
+          <button className="flex bg-slate-500 rounded-md h-20 w-20 text-6xl shadow-md cursor-default text-slate-300 items-center justify-center">
             <GoTriangleRight />
           </button>
         </span>

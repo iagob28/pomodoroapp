@@ -2,34 +2,24 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import { Display } from "../components/Display";
+import { useTimer } from "../hooks/useTimer";
 
 export function Home() {
-  const [time, setTime] = useState(25);
-  const [pause, setPause] = useState(5);
-  const [sessions, setSessions] = useState(3);
-  const history = useNavigate();
+  const {
+    sessions,
+    setSessions,
+    time,
+    setTime,
+    pause,
+    setPause,
+    changeIsActive,
+  } = useTimer();
 
-  if (sessions > 3) {
-    setSessions(3);
-  }
-  if (time > 40) {
-    setTime(40);
-  }
-  if (pause > 10) {
-    setPause(10);
-  }
-  if (sessions < 0) {
-    setSessions(0);
-  }
-  if (time < 0) {
-    setTime(0);
-  }
-  if (pause < 0) {
-    setPause(0);
-  }
+  const history = useNavigate();
 
   function handleContinueButton() {
     history("/timer");
+    changeIsActive();
   }
 
   return (

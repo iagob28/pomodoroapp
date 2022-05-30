@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router-dom";
+import { useTimer } from "../../hooks/useTimer";
 import { Button } from "../Button";
 
 export function Header() {
   const history = useNavigate();
+  const {changeIsActive} = useTimer()
 
   function handleHomeButton() {
     history("/");
+    changeIsActive()
   }
   return (
     <>

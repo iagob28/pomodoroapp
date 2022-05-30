@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { GiPauseButton } from "react-icons/gi";
 import { GoTriangleRight } from "react-icons/go";
 import { Header } from "../components/Header/Header";
+import { useTimer } from "../hooks/useTimer";
 
 export function Pause() {
-  const minutes = "05";
-  const seconds = "00";
-  const [sessions, setSessions] = useState(2);
+  const { pauseSeconds, sessions, isActive, changeIsActive } = useTimer();
+  const displayMinutes = Math.floor(pauseSeconds / 60);
+  const displaySeconds = pauseSeconds % 60;
   return (
     <>
       <Header />
@@ -13,7 +14,8 @@ export function Pause() {
         <div className="flex justify-center items-center h-80 w-80 bg-slate-600 rounded-full shadow-lg shadow-slate-600">
           <span className="flex justify-center items-center h-60 w-60 bg-transparent rounded-full border-4 border-yellow-500 ">
             <p className="text-6xl font-bold text-slate-300">
-              {minutes}:{seconds}
+              {String(displayMinutes).padStart(2, "0")}:
+              {String(displaySeconds).padStart(2, "0")}
             </p>
           </span>
         </div>
@@ -34,8 +36,8 @@ export function Pause() {
               )}
             </span>
           </div>
-          <button className="flex bg-slate-500 rounded-md h-20 w-20 text-6xl shadow-md hover:bg-slate-600 text-slate-300 items-center justify-center">
-            <GoTriangleRight />
+          <button className="flex bg-slate-500 rounded-md h-20 w-20 text-6xl shadow-md cursor-default text-slate-300 items-center justify-center">
+            <GiPauseButton />
           </button>
         </span>
       </div>
