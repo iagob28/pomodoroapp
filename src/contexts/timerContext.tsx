@@ -33,16 +33,16 @@ export function TimerContextProvider(props: propsType) {
   const [pauseSeconds, setPauseSeconds] = useState(pause * 60); //mutiplies by 60 to transform in seconds
   const [isActive, setIsActive] = useState(false);
 
-  if (sessions > 3) {
+  if (sessions > 3) {  //limit sessions to 3
     setSessions(3);
   }
-  if (time > 40) {
+  if (time > 40) { //limit timer to 40 minutes
     setTime(40);
   }
-  if (pause > 10) {
+  if (pause > 10) { //limit pause to 10 minutes
     setPause(10);
   }
-  if (sessions < 0) {
+  if (sessions < 0) { //neither session, time and pausetime can be less than 0
     setSessions(0);
   }
   if (time < 0) {
